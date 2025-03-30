@@ -1,5 +1,8 @@
 package fctreddit.api;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Represents a Post and a Reply in the system
  */
@@ -14,6 +17,7 @@ public class Post {
 	private String parentUrl; //This should be null when this is a top level post.
 	private int upVote;
 	private int downVote;
+	private Map<String, Boolean> voteMap;
 	
 	
 	public Post() {
@@ -29,12 +33,14 @@ public class Post {
 		this.parentUrl = null;
 		this.upVote = 0;
 		this.downVote = 0;
+		this.voteMap = new HashMap<String, Boolean>();
 	}
 	
 	public Post(String authorId, String content, String parentUrl) {
 		this(authorId, content);
 		this.parentUrl = parentUrl;
 	}
+
 	
 	public Post(String authorId, String content, String parentUrl, String mediaUrl) {
 		this(authorId, content, parentUrl);
@@ -116,6 +122,33 @@ public class Post {
 
 	public void setDownVote(int downVote) {
 		this.downVote = downVote;
+	}
+
+	public  void upVote(String userID){
+		this.upVote++;
+		voteMap.put(userID, true);
+	}
+
+	public  void downVote(String userID){
+		this.downVote++;
+		voteMap.put(userID, false);
+	}
+
+	public void removeUpVote(String userID){
+		this.upVote--;
+		voteMap.remove(userID);
+	}
+	public void removeDownVote(String userID){
+		this.downVote--;
+		voteMap.remove(userID);
+	}
+
+	public boolean hasVote(String userID){
+		return voteMap.containsKey(userID);
+	}
+
+	public boolean getVote(String userID){
+		return voteMap.get(userID);
 	}
 
 	public int hashCode() {
