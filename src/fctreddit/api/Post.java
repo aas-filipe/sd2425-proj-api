@@ -1,7 +1,6 @@
 package fctreddit.api;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a Post and a Reply in the system
@@ -17,6 +16,7 @@ public class Post {
 	private String parentUrl; //This should be null when this is a top level post.
 	private int upVote;
 	private int downVote;
+	private List<String> comments;
 	private Map<String, Boolean> voteMap;
 	
 	
@@ -34,6 +34,7 @@ public class Post {
 		this.upVote = 0;
 		this.downVote = 0;
 		this.voteMap = new HashMap<String, Boolean>();
+		this.comments = new ArrayList<String>();
 	}
 	
 	public Post(String authorId, String content, String parentUrl) {
@@ -141,6 +142,14 @@ public class Post {
 	public void removeDownVote(String userID){
 		this.downVote--;
 		voteMap.remove(userID);
+	}
+
+	public void addComment(String commentID){
+		this.comments.add(commentID);
+	}
+
+	public Iterator<String> getCommentsIterator(){
+		return comments.iterator();
 	}
 
 	public boolean hasVote(String userID){
