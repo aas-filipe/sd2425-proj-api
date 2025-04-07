@@ -9,7 +9,7 @@ import java.util.List;
 public class ContentResource implements Content {
     @Override
     public Result<String> createPost(Post post, String userPassword) {
-        return null;
+
     }
 
     @Override

@@ -3,14 +3,24 @@ package fctreddit.api.java.resources;
 import fctreddit.api.User;
 import fctreddit.api.java.Result;
 import fctreddit.api.java.Users;
+import fctreddit.api.server.persistence.Hibernate;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UsersResource implements Users {
 
+    private static Logger Log = Logger.getLogger(UsersResource.class.getName());
+
+    private Hibernate hibernate;
+
+    public UsersResource() {
+        Hibernate hibernate = Hibernate.getInstance();
+    }
+
     @Override
     public Result<String> createUser(User user) {
-        return null;
+        if (user.getUserId() == null) {}
     }
 
     @Override

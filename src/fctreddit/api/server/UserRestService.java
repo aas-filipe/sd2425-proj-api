@@ -17,7 +17,7 @@ public class UserRestService implements RestUsers {
         this.impl = new UsersResource();
     }
 
-    Logger Log = Logger.getLogger("fctreddit.api.server");
+    Logger Log = Logger.getLogger(String.valueOf(UserRestService.class));
 
     @Override
     public String createUser(User user) {
