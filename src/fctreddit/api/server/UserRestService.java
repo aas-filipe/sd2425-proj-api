@@ -1,88 +1,73 @@
 package fctreddit.api.server;
 import fctreddit.api.User;
 import fctreddit.api.java.Result;
+import fctreddit.api.java.Users;
+import fctreddit.api.java.resources.UsersResource;
 import fctreddit.api.rest.RestUsers;
-import fctreddit.api.server.persistence.Hibernate;
 import jakarta.ws.rs.WebApplicationException;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 public class UserRestService implements RestUsers {
 
-    private static Logger logger = Logger.getLogger(UserRestService.class.getName());
+    final Users impl;
 
-    private Hibernate hibernate;
+    public UserRestService() {
+        this.impl = new UsersResource();
+    }
 
-    public UserRestService() { this.hibernate = Hibernate.getInstance(); }
+    Logger Log = Logger.getLogger("fctreddit.api.server");
 
     @Override
-    public String createUser(User user) throws WebApplicationException {
-        User u = hibernate.get(User.class, user.getUserId());
-        if (u != null) {
-            throw new WebApplicationException(Response.Status.CONFLICT);
-        }
-        //TODO: BAD REQUEST RESPONSE
-        try {
-            hibernate.persist(user);
-        } catch (Exception e) {
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
+    public String createUser(User user) {
+        Log.info("createUser : " + user.toString());
 
-        return user.getUserId();
+        Result<String> res = impl.createUser(user);
+        if(!res.isOK()){
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
+        }
+        return res.value();
     }
 
     @Override
     public User getUser(String userId, String password) {
-        User u = authenticateUser(userId, password);
+        Log.info("getUser : " + userId);
 
-        logger.fine("User with id " + userId + " found");
-        return u;
+        Result<User> res = impl.getUser(userId, password);
+        if(!res.isOK()){
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
+        }
+        return res.value();
     }
 
     @Override
     public User updateUser(String userId, String password, User user) {
-        authenticateUser(userId, password);
 
-        try {
-            hibernate.persist(user);
-        } catch (Exception e) {
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        Result<User> res = impl.updateUser(userId, password,);
+        if(!res.isOK()){
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
         }
-
-        return user;
-
+        return res.value();
     }
 
     @Override
     public User deleteUser(String userId, String password) {
-        User u = authenticateUser(userId, password);
 
-        try {
-            hibernate.delete(u);
-        } catch (Exception e) {
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        Result<User> res = impl.deleteUser(userId, password);
+        if(!res.isOK()){
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
         }
-        return u;
-    }
-
-    private User authenticateUser(String userId, String password) {
-        User u = hibernate.get(User.class, userId);
-        if (u == null) {
-            logger.warning("User with id " + userId + " not found");
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        if (!u.getPassword().equals(password)) {
-            logger.warning("Password does not match");
-            throw new WebApplicationException(Response.Status.FORBIDDEN);
-        }
-        return u;
+        return res.value();
     }
 
     @Override
     public List<User> searchUsers(String pattern) {
-        // TODO : JPQL QUERY
-        return List.of();
+
+        Result<List<User>> res = impl.searchUsers(pattern);
+        if(!res.isOK()){
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
+        }
+        return res.value();
     }
 }
