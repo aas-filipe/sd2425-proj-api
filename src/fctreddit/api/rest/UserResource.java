@@ -1,23 +1,22 @@
-package fctreddit.api.server;
+package fctreddit.api.rest;
 import fctreddit.api.User;
 import fctreddit.api.java.Result;
 import fctreddit.api.java.Users;
-import fctreddit.api.java.resources.UsersResource;
-import fctreddit.api.rest.RestUsers;
+import fctreddit.api.java.resources.UsersJava;
 import jakarta.ws.rs.WebApplicationException;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class UserRestService implements RestUsers {
+public class UserResource implements RestUsers {
 
     final Users impl;
 
-    public UserRestService() {
-        this.impl = new UsersResource();
+    public UserResource() {
+        this.impl = new UsersJava();
     }
 
-    Logger Log = Logger.getLogger("fctreddit.api.server");
+    Logger Log = Logger.getLogger(String.valueOf(UserResource.class));
 
     @Override
     public String createUser(User user) {
@@ -25,7 +24,7 @@ public class UserRestService implements RestUsers {
 
         Result<String> res = impl.createUser(user);
         if(!res.isOK()){
-            throw new WebApplicationException(errorCodeToStatus(res.error()));
+            throw new WebApplicationException(errorCodeFrom(res.error()));
         }
         return res.value();
     }
@@ -70,4 +69,5 @@ public class UserRestService implements RestUsers {
         }
         return res.value();
     }
+
 }

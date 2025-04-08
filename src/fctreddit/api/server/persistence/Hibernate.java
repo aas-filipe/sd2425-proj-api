@@ -1,4 +1,4 @@
-package fctreddit.api.java.persistence;
+package fctreddit.api.server.persistence;
 
 import java.io.File;
 import java.util.List;
