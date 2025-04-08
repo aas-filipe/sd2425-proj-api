@@ -2,21 +2,21 @@ package fctreddit.api.rest;
 import fctreddit.api.User;
 import fctreddit.api.java.Result;
 import fctreddit.api.java.Users;
-import fctreddit.api.java.resources.UsersResource;
+import fctreddit.api.java.resources.UsersJava;
 import jakarta.ws.rs.WebApplicationException;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class UserRestService implements RestUsers {
+public class UserResource implements RestUsers {
 
     final Users impl;
 
-    public UserRestService() {
-        this.impl = new UsersResource();
+    public UserResource() {
+        this.impl = new UsersJava();
     }
 
-    Logger Log = Logger.getLogger(String.valueOf(UserRestService.class));
+    Logger Log = Logger.getLogger(String.valueOf(UserResource.class));
 
     @Override
     public String createUser(User user) {

@@ -1,17 +1,17 @@
 package fctreddit.api.rest;
 
-import fctreddit.api.java.resources.ImageResource;
+import fctreddit.api.java.resources.ImageJava;
 import fctreddit.api.java.Result;
 import jakarta.ws.rs.WebApplicationException;
 
 import java.util.logging.Logger;
 
-public class ImageRestService implements RestImage {
-    private Logger Log = Logger.getLogger(String.valueOf(ImageRestService.class));
-    private ImageResource impl;
+public class ImageResource implements RestImage {
+    private Logger Log = Logger.getLogger(String.valueOf(ImageResource.class));
+    private ImageJava impl;
 
-    public ImageRestService() {
-        impl = new ImageResource();
+    public ImageResource() {
+        impl = new ImageJava();
     }
 
     @Override

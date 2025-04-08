@@ -2,18 +2,18 @@ package fctreddit.api.rest;
 
 import fctreddit.api.Post;
 import fctreddit.api.java.Result;
-import fctreddit.api.java.resources.ContentResource;
+import fctreddit.api.java.resources.ContentJava;
 import jakarta.ws.rs.WebApplicationException;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class ContentRestService implements RestContent {
-    private Logger Log = Logger.getLogger(String.valueOf(ContentRestService.class));
+public class ContentResource implements RestContent {
+    private Logger Log = Logger.getLogger(String.valueOf(ContentResource.class));
 
-    private ContentResource impl;
-    public ContentRestService() {
-        impl = new ContentResource();
+    private ContentJava impl;
+    public ContentResource() {
+        impl = new ContentJava();
     }
 
     @Override

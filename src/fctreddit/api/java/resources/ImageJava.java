@@ -2,7 +2,7 @@ package fctreddit.api.java.resources;
 import fctreddit.api.java.Image;
 import fctreddit.api.java.Result;
 
-public class ImageResource implements Image {
+public class ImageJava implements Image {
     @Override
     public Result<String> createImage(String userId, byte[] imageContents, String password) {
         return null;

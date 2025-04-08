@@ -6,7 +6,7 @@ import fctreddit.api.java.Result;
 
 import java.util.List;
 
-public class ContentResource implements Content {
+public class ContentJava implements Content {
     @Override
     public Result<String> createPost(Post post, String userPassword) {
 

@@ -1,6 +1,6 @@
 package fctreddit.api.server;
 
-import fctreddit.api.java.resources.UsersResource;
+import fctreddit.api.rest.UserResource;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -23,9 +23,8 @@ public class UsersServer {
 
     public static void main(String[] args) {
         try {
-
             ResourceConfig config = new ResourceConfig();
-            config.register(UsersResource.class);
+            config.register(UserResource.class);
 
             String ip = InetAddress.getLocalHost().getHostAddress();
             String serverURI = String.format(SERVER_URI_FMT, ip, PORT);
