@@ -67,6 +67,7 @@ public class UsersJava implements Users {
         if(!password.equals(oldUser.getPassword())) {
             return Result.error(Result.ErrorCode.FORBIDDEN);
         }
+        if(user.getEmail() != null && user.getFullName() != null && !user.getFullName().isEmpty() ) {}
         hibernate.update(user);
         return Result.ok(user);
     }

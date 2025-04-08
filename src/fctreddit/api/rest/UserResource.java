@@ -24,7 +24,7 @@ public class UserResource implements RestUsers {
 
         Result<String> res = impl.createUser(user);
         if(!res.isOK()){
-            throw new WebApplicationException(errorCodeToStatus(res.error()));
+            throw new WebApplicationException(errorCodeFrom(res.error()));
         }
         return res.value();
     }
@@ -69,4 +69,5 @@ public class UserResource implements RestUsers {
         }
         return res.value();
     }
+
 }
