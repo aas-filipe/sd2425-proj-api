@@ -1,6 +1,7 @@
 package fctreddit.api.server;
 
 import fctreddit.api.rest.UserResource;
+import fctreddit.api.server.serviceDiscovery.Discovery;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -17,6 +18,8 @@ public class UsersServer {
         System.setProperty("java.util.logging.SimpleFormatter.format", "%4$s: %5$s\n");
     }
 
+    private static Discovery discovery;
+
     public static final int PORT = 8080;
     public static final String SERVICE = "User";
     private static final String SERVER_URI_FMT = "http://%s:%s/rest";
@@ -28,6 +31,8 @@ public class UsersServer {
 
             String ip = InetAddress.getLocalHost().getHostAddress();
             String serverURI = String.format(SERVER_URI_FMT, ip, PORT);
+            discovery = new Discovery(Discovery.DISCOVERY_ADDR, SERVICE, serverURI);
+            discovery.start();
             JdkHttpServerFactory.createHttpServer( URI.create(serverURI), config);
 
             Log.info(String.format("%s Server ready @ %s\n",  SERVICE, serverURI));
