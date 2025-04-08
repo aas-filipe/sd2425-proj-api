@@ -1,11 +1,8 @@
 package fctreddit.api.java.resources;
 
 import fctreddit.api.Post;
-import fctreddit.api.User;
-import fctreddit.api.java.*;
-import fctreddit.api.java.persistence.Hibernate;
-import fctreddit.api.rest.RestUsers;
-import jakarta.ws.rs.WebApplicationException;
+import fctreddit.api.java.Content;
+import fctreddit.api.java.Result;
 
 import java.util.List;
 
