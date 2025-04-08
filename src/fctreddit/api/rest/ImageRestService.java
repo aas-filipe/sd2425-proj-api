@@ -1,11 +1,9 @@
-package fctreddit.api.server;
+package fctreddit.api.rest;
 
 import fctreddit.api.java.resources.ImageResource;
-import fctreddit.api.rest.RestImage;
 import fctreddit.api.java.Result;
 import jakarta.ws.rs.WebApplicationException;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 public class ImageRestService implements RestImage {

@@ -1,9 +1,8 @@
-package fctreddit.api.server;
+package fctreddit.api.rest;
 
 import fctreddit.api.Post;
 import fctreddit.api.java.Result;
 import fctreddit.api.java.resources.ContentResource;
-import fctreddit.api.rest.RestContent;
 import jakarta.ws.rs.WebApplicationException;
 
 import java.util.List;
