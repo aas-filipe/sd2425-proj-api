@@ -6,6 +6,8 @@ import jakarta.ws.rs.WebApplicationException;
 
 import java.util.logging.Logger;
 
+import static fctreddit.api.rest.ErrorParser.errorCodeToStatus;
+
 public class ImageResource implements RestImage {
     private Logger Log = Logger.getLogger(String.valueOf(ImageResource.class));
     private ImageJava impl;

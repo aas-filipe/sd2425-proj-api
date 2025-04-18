@@ -8,7 +8,7 @@ import jakarta.ws.rs.WebApplicationException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class ContentResource implements RestContent {
+public class ContentResource  extends ErrorParser implements RestContent {
     private Logger Log = Logger.getLogger(String.valueOf(ContentResource.class));
 
     private ContentJava impl;
@@ -137,4 +137,5 @@ public class ContentResource implements RestContent {
         }
         return res.value();
     }
+
 }

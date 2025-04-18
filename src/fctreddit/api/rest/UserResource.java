@@ -5,14 +5,18 @@ import fctreddit.api.java.Users;
 import fctreddit.api.java.resources.UsersJava;
 import jakarta.ws.rs.WebApplicationException;
 
+
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static fctreddit.api.rest.ErrorParser.errorCodeToStatus;
 
 public class UserResource implements RestUsers {
 
     final Users impl;
 
-    public UserResource() {
+    public UserResource() throws IOException {
         this.impl = new UsersJava();
     }
 
@@ -24,7 +28,7 @@ public class UserResource implements RestUsers {
 
         Result<String> res = impl.createUser(user);
         if(!res.isOK()){
-            throw new WebApplicationException(errorCodeFrom(res.error()));
+            throw new WebApplicationException(errorCodeToStatus(res.error()));
         }
         return res.value();
     }
@@ -43,7 +47,7 @@ public class UserResource implements RestUsers {
     @Override
     public User updateUser(String userId, String password, User user) {
 
-        Result<User> res = impl.updateUser(userId, password,);
+        Result<User> res = impl.updateUser(userId, password, user);
         if(!res.isOK()){
             throw new WebApplicationException(errorCodeToStatus(res.error()));
         }

@@ -1,5 +1,7 @@
 package fctreddit.api;
 
+import jakarta.persistence.Id;
+
 import java.util.*;
 
 /**
@@ -7,7 +9,7 @@ import java.util.*;
  */
 
 public class Post {
-
+	@Id
 	private String postId;
 	private String authorId;
 	private long creationTimestamp;
