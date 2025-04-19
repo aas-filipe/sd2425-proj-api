@@ -31,6 +31,7 @@ public class UserClientFactory {
     public Result<User> getUser(String userId, String password) throws InterruptedException {
         URI[] serviceURIs = discovery.knownUrisOf(UsersServer.SERVICE, 1);
         URI selectedServiceURI = serviceURIs[0];
+
         UsersClient client = null;
         if (selectedServiceURI.toString().contains("/rest")) {
             client = new UsersRestClient(selectedServiceURI);

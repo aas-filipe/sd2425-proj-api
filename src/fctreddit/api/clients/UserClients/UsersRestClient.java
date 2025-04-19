@@ -4,10 +4,7 @@ import fctreddit.api.User;
 import fctreddit.api.clients.util.RestClientHelper;
 import fctreddit.api.java.Result;
 import fctreddit.api.rest.RestUsers;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.client.ClientConfig;
@@ -40,13 +37,28 @@ public class UsersRestClient extends UsersClient {
     }
     @Override
     public Result<User> getUser(String userId, String password) {
-        Invocation.Builder builder = target.path( userId ).path( RestUsers.PATH )
+        Invocation.Builder builder = target.path( userId )
                 .queryParam(RestUsers.PASSWORD, password ).request()
                 .accept(MediaType.APPLICATION_JSON);
         Response r = RestClientHelper.executeOperation(builder::get);
         int status = r.getStatus();
         if ( status == Response.Status.OK.getStatusCode() && r.hasEntity() ) {
             return Result.ok(r.readEntity(User.class));
+        } else {
+            return Result.error(RestClientHelper.getErrorCodeFrom(status));
+        }
+    }
+
+    @Override
+    public Result<Void> updateUser(User user, String userId, String password) {
+        Invocation.Builder builder = target.path( userId )
+                .queryParam(RestUsers.PASSWORD, password ).request()
+                .accept(MediaType.APPLICATION_JSON);
+        Response r = RestClientHelper.executeOperation(() -> builder.put(Entity.entity(user, MediaType.APPLICATION_JSON)));
+
+        int status = r.getStatus();
+        if ( status == Response.Status.NO_CONTENT.getStatusCode()) {
+            return Result.ok();
         } else {
             return Result.error(RestClientHelper.getErrorCodeFrom(status));
         }

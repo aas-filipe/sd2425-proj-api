@@ -175,4 +175,8 @@ public class ContentJava implements Content {
     public Result<Void> removePostFromUser(String userId) {
         return null;
     }
+
+    public Result<Void> removeVotesFromUser(String userId) {
+        return null;
+    }
 }

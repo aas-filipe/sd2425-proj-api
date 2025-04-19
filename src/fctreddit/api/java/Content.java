@@ -194,5 +194,12 @@ public interface Content {
 	 */
 	public Result<Void> removePostFromUser(String userId);
 
+	/**
+	 * Removes all the votes, up or down, that a user has made across all the posts2
+	 * @param userId
+	 * @param postIds
+	 * @return
+	 */
+	public Result<Void> removeVotesFromUser(String userId, List<String> postIds);
 
 }

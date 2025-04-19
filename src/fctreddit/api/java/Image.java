@@ -33,16 +33,4 @@ public interface Image {
 	 */
 	Result<Void> deleteImage(String userId, String imageId, String password);
 
-	/**
-	 * Removes ownership of the images from the target user to a deleted user.
-	 * @param userId target user of this operation.
-	 * @return OK if all the images were moved to the deleted directory
-	 * 		   and NOT_FOUND if the user doesn't exist.
-	 */
-	Result<Void> removeImagesFromUser(String userId);
-
-
-	
-	
-	
 }
