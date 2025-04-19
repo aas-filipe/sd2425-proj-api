@@ -188,4 +188,8 @@ public class Post {
 		return "Post [postId=" + postId + ", authorId=" + authorId + ", content=" + content + ", mediaUrl=" + mediaUrl
 				+ ", parentUrl=" + parentUrl + ", creationTimestamp=" + creationTimestamp + ", upVote=" + upVote + ", downVote=" + downVote + "]";
 	}
+
+	public boolean canDelete(){
+		return (upVote == 0 && downVote == 0 && comments.isEmpty());
+	}
 }

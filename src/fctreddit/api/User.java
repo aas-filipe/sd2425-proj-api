@@ -1,7 +1,11 @@
 package fctreddit.api;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a User in the system
@@ -14,8 +18,11 @@ public class User {
 	private String fullName;
 	private String password;
 	private String avatarUrl;
+	@ElementCollection
+	private List<String> InteractedPosts;
 	
-	public User(){	
+	public User(){
+		InteractedPosts = new ArrayList<>();
 	}
 	
 	public User(String userId, String fullName, String email, String password) {
@@ -114,6 +121,10 @@ public class User {
 	public String getAvatarUrl() {
 		return this.avatarUrl;
 	}
+
+	public void interactedWith(String postId){ InteractedPosts.add(postId);}
+
+	public List<String> getInteractedPosts() {return InteractedPosts;}
 
 	@Override
 	public String toString() {
