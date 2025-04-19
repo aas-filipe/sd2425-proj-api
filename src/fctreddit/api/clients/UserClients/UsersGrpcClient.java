@@ -17,4 +17,9 @@ public class UsersGrpcClient extends UsersClient {
     public Result<User> getUser(String userId, String password) {
         return null;
     }
+
+    @Override
+    public Result<Void> updateUser(User user, String userId, String password) {
+        return null;
+    }
 }

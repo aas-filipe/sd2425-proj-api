@@ -97,15 +97,4 @@ public interface RestUsers {
 	List<User> searchUsers(@QueryParam(QUERY) String pattern);
 
 
-	/**
-	 * Checks if the user is valid provided the userId and its respective password
-	 * @param userId target userId for the login.
-	 * @param password provided password for the login.
-	 * @return NO_CONTENT if the user exists and the password matches, NOT_FOUND if the user
-	 * doesn't exist, FORBIDDEN if the password is wrong.
-	 */
-	@Path("/{" + USER_ID + "}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	Void login(@PathParam(USER_ID) String userId, @QueryParam(PASSWORD) String password);
 }
