@@ -127,6 +127,17 @@ public class Post {
 		this.downVote = downVote;
 	}
 
+	public void removeVote(String userId) {
+		boolean IsUpvote= voteMap.get(userId);
+		if(IsUpvote){
+			upVote--;
+			voteMap.remove(userId);
+		}else{
+			downVote--;
+			voteMap.remove(userId);
+		}
+	}
+
 	public  void upVote(String userID){
 		this.upVote++;
 		voteMap.put(userID, true);
