@@ -5,6 +5,7 @@ import fctreddit.api.User;
 import fctreddit.api.java.Content;
 import fctreddit.api.java.Image;
 import fctreddit.api.java.Result;
+import fctreddit.api.java.util.Content.VoteType;
 import fctreddit.api.rest.RestUsers;
 import fctreddit.api.server.persistence.Hibernate;
 import jakarta.ws.rs.WebApplicationException;
@@ -162,6 +163,16 @@ public class ContentJava implements Content {
 
     @Override
     public Result<Integer> getDownVotes(String postId) {
+        return null;
+    }
+
+    @Override
+    public Result<VoteType> getUserVote(String postId, String userId) {
+        return null;
+    }
+
+    @Override
+    public Result<Void> removePostFromUser(String userId) {
         return null;
     }
 }

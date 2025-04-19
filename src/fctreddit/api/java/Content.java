@@ -3,6 +3,7 @@ package fctreddit.api.java;
 import java.util.List;
 
 import fctreddit.api.Post;
+import fctreddit.api.java.util.Content.VoteType;
 
 public interface Content {
 
@@ -176,5 +177,22 @@ public interface Content {
 	 * 			NOT_FOUND if the postId does not match an existing post
 	 */
 	public Result<Integer> getDownVotes(String postId);
+
+	/**
+	 *
+	 * Checks if the user has voted on a given post.
+	 * @param postId The post that is targeted by this operation.
+	 * @param userId The userId relating to the user that invoked the operation.
+	 * @return OK and true if the user has voted, false otherwise, NOT_FOUND if either
+	 * the user or the post are non-existent.
+	 */
+	public Result<VoteType> getUserVote(String postId, String userId);
+
+	/**
+	 * Sets all authorIds of all the posts of a given user to null.
+	 * @param userId target user of the operation.
+	 */
+	public Result<Void> removePostFromUser(String userId);
+
 
 }
